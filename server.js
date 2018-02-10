@@ -35,6 +35,11 @@ app.use(passport.initialize());
 passport.use(basicStrategy);
 passport.use(jwtStrategy);
 
+//just so that the test server file works. delete later
+app.get('/api/*', (req, res) => {
+  res.json({ok: true});
+});
+
 app.use('/users/', usersRouter);
 app.use('/auth/', authRouter);
 
