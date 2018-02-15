@@ -113,20 +113,31 @@ router.post('/picks/:username', jsonParser, (req, res) => {
   console.log('POST', req.body);
   console.log(req.params.username);
   User
-    .getUserByUsername(req.params.username)
-    .then((user) => {
-      Object.keys(user.picks).forEach(function(key) {
-        user.picks[key] = req.body[key];
-      });
-      return user.save();
-    })
-    .then(savedUser => {
-      return res.json(savedUser.apiRepr());
+    .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
+    .then(user => {
+      console.log(user);
+      return res.status(201).json(user.apiRepr());
     })
     .catch(err => {
       console.error(err);
       res.status(500).json({message: 'Internal server error'});
     });
+  // .getUserByUsername(req.params.username)
+  // .then((user) => {
+  //   Object.keys(user.picks).forEach(function(key) {
+  //     user.picks[key] = req.body[key];
+  //   });
+  //   console.log(user);
+  //   return user.save();
+  // })
+  // .then(savedUser => {
+  //   savedUser.save();
+  //   return res.json(savedUser.apiRepr());
+  // })
+  // .catch(err => {
+  //   console.error(err);
+  //   res.status(500).json({message: 'Internal server error'});
+  // });
 });
 
 module.exports = router;

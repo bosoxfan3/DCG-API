@@ -8,6 +8,7 @@ const passport = require('passport');
 const usersRouter = require('./users/router');
 const authRouter = require('./auth/router');
 const matchupsRouter = require('./matchups/router');
+const picksRouter = require('./picks/router');
 const { basicStrategy, jwtStrategy } = require('./auth/strategies');
 
 mongoose.Promise = global.Promise;
@@ -44,6 +45,7 @@ app.get('/api/*', (req, res) => {
 app.use('/users/', usersRouter);
 app.use('/auth/', authRouter);
 app.use('/matchups', matchupsRouter);
+app.use('/picks', picksRouter);
 
 app.use('*', (req, res) => {
   return res.status(404).json({message: 'Not found'});
