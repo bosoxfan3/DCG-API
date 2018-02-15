@@ -7,6 +7,18 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
+router.get('/:username', jsonParser, (req, res) => {
+  User.findOne({username: req.params.username})
+    .then(user => {
+      console.log(user);
+      return res.status(200).json(user.apiRepr());
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'});
+    });
+});
+
 router.post('/signup', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password', 'name'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -122,22 +134,6 @@ router.post('/picks/:username', jsonParser, (req, res) => {
       console.error(err);
       res.status(500).json({message: 'Internal server error'});
     });
-  // .getUserByUsername(req.params.username)
-  // .then((user) => {
-  //   Object.keys(user.picks).forEach(function(key) {
-  //     user.picks[key] = req.body[key];
-  //   });
-  //   console.log(user);
-  //   return user.save();
-  // })
-  // .then(savedUser => {
-  //   savedUser.save();
-  //   return res.json(savedUser.apiRepr());
-  // })
-  // .catch(err => {
-  //   console.error(err);
-  //   res.status(500).json({message: 'Internal server error'});
-  // });
 });
 
 module.exports = router;

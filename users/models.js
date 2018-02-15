@@ -7,7 +7,8 @@ const UserSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   name: {type: String, required: true},
-  picks: {type: Object}
+  picks: {type: Object, default: null},
+  points: {type: Number, default: 0}
 });
 
 UserSchema.methods.apiRepr = function() {
@@ -15,7 +16,8 @@ UserSchema.methods.apiRepr = function() {
     id: this._id,
     username: this.username || '',
     name: this.name || '',
-    picks: this.picks || {}
+    picks: this.picks || null,
+    points: this.points || 0
   };
 };
 
