@@ -7,6 +7,12 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
+router.get('/all', jsonParser, (req, res) => {
+  return User.find()
+    .then(users => res.json(users.map(user => user.serialize())))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
 router.get('/:username', jsonParser, (req, res) => {
   User.findOne({username: req.params.username})
     .then(user => {
