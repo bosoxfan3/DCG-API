@@ -7,9 +7,18 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
+function sortByKey(array, key) {
+  return array.sort(function(a, b) {
+    let x = a[key];
+    let y = b[key];
+    return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+  });
+}
+
 router.get('/all', jsonParser, (req, res) => {
-  return User.find()
-    .then(users => res.json(users.map(user => user.serialize())))
+  User.find()
+    .then(users => sortByKey(users, 'points'))
+    .then(sortedUsers => res.json(sortedUsers.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
