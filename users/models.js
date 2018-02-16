@@ -24,6 +24,7 @@ UserSchema.methods.apiRepr = function() {
 UserSchema.methods.serialize = function() {
   return {
     name: this.name || '',
+    picks: this.picks || null,
     points: this.points || 0
   };
 };
