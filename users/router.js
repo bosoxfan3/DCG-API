@@ -15,6 +15,35 @@ function sortByKey(array, key) {
   });
 }
 
+const answerKey = [
+  'New England',
+  'Oakland'
+];
+
+function updatePoints(users) {
+  for (let i=0; i<users.length; i++) {
+    let picksArray = [];
+    for (let key in users[i].picks) {
+      picksArray.push(users[i].picks[key]);
+    }
+    for (let j=0; j<picksArray.length; j++) {
+      let currentPick = picksArray[j];
+      if (currentPick === answerKey[j]) {
+        users[i].points += 1;
+      }
+    }
+  }
+  return users;
+}
+
+router.post('/scores', jsonParser, (req, res) => {
+  User.find()
+    .then(users => updatePoints(users))
+    .then(updatedUsers => sortByKey(updatedUsers, 'points'))
+    .then(sortedUsers => res.json(sortedUsers.map(user => user.serialize())))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
 router.get('/all', jsonParser, (req, res) => {
   User.find()
     .then(users => sortByKey(users, 'points'))

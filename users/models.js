@@ -7,7 +7,7 @@ const UserSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   name: {type: String, required: true},
-  picks: {type: Object, default: null},
+  picks: {type: Object, default: {}},
   points: {type: Number, default: 0}
 });
 
