@@ -20,28 +20,27 @@ const answerKey = [
   'Oakland'
 ];
 
-function updatePoints(users) {
-  for (let i=0; i<users.length; i++) {
-    let picksArray = [];
-    for (let key in users[i].picks) {
-      picksArray.push(users[i].picks[key]);
-    }
-    for (let j=0; j<picksArray.length; j++) {
-      let currentPick = picksArray[j];
-      if (currentPick === answerKey[j]) {
-        users[i].points += 1;
-      }
+function updateUser(user) {
+  let picksArray = [];
+  for (let key in user.picks) {
+    picksArray.push(user.picks[key]);
+  }
+  for (let i=0; i<picksArray.length; i++) {
+    let currentPick = picksArray[i];
+    if (currentPick === answerKey[i]) {
+      user.points += 1;
     }
   }
-  return users;
+  return user.save();
 }
 
 router.post('/scores', jsonParser, (req, res) => {
-  User.find()
-    .then(users => updatePoints(users))
-    .then(updatedUsers => sortByKey(updatedUsers, 'points'))
-    .then(sortedUsers => res.json(sortedUsers.map(user => user.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+  User.find({})
+    .then(users => users.map(user => updateUser(user)))
+    .then(promiseArr => {
+      Promise.all()
+        .then(updatedUsers => res.json(updatedUsers.map(user => user.serialize())));
+    });
 });
 
 router.get('/all', jsonParser, (req, res) => {
