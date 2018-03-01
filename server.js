@@ -42,8 +42,8 @@ app.get('/api/*', (req, res) => {
   res.json({ok: true});
 });
 
-app.use('/users/', usersRouter);
-app.use('/auth/', authRouter);
+app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 app.use('/matchups', matchupsRouter);
 app.use('/picks', picksRouter);
 
