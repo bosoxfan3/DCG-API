@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const arizona = 'http://prod.static.cardinals.clubs.nfl.com/assets/img/bg/logo.png';
-const atlanta = 'https://content.sportslogos.net/logos/7/173/thumbs/299.gif';
-const baltimore = 'https://content.sportslogos.net/logos/7/153/thumbs/318.gif';
+const arizona = 'https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/ARI.svg';
+const atlanta = 'https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/ATL.svg';
+const baltimore = 'https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/BAL.svg';
 const buffalo = 'https://content.sportslogos.net/logos/7/149/thumbs/n0fd1z6xmhigb0eej3323ebwq.gif';
 const carolina = 'http://content.sportslogos.net/logos/7/174/thumbs/f1wggq2k8ql88fe33jzhw641u.gif';
 const chicago = 'http://content.sportslogos.net/logos/7/169/thumbs/364.gif';
