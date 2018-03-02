@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const arizona = 'https://content.sportslogos.net/logos/7/177/thumbs/kwth8f1cfa2sch5xhjjfaof90.gif';
+const arizona = 'http://prod.static.cardinals.clubs.nfl.com/assets/img/bg/logo.png';
 const atlanta = 'https://content.sportslogos.net/logos/7/173/thumbs/299.gif';
 const baltimore = 'https://content.sportslogos.net/logos/7/153/thumbs/318.gif';
 const buffalo = 'https://content.sportslogos.net/logos/7/149/thumbs/n0fd1z6xmhigb0eej3323ebwq.gif';
