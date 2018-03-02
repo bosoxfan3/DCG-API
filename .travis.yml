@@ -6,6 +6,6 @@ deploy:
   provider: heroku
   api_key:
     secure: DuxTLI2Va/6JYStoefBs2PDzf5EhQnZ3aD50C48ADWIr1zXIZx4rR+zphk+VmXwRhLX1gvQ054nUrNsb+z0XpxtMlAMo98WZ+XR+t3o8KKl/xm3w7+tNWGG2/7ZnOlAjARinygDwivPGGb1OhpnoFvnAkQm98AsBsKv3yh6C7Cn842MP3IPraPWxJVtPTYbIR5y4M2447RS8RTH6IxLmdCLPL6QazPNCQSMun80eQO233IYG8AXviHPH3W+F14/tvUwXRwvy45N/tVllfWkWTt7FmtvT/Pg/WacPJOCF7L4y6teCEMm8CB1cY3XU9JwzeG+EUREMXvkejcEgitWV8fTg91H+e4nu4xEBKxgxZXI8Iqck6ItJ9YVNyZ+IJAPJjLr6WcY1gfOvpTIWrLrLOYoejTit97oyZBuyDnOG69fp2/WdLpd78f09G++6fd4bD4czax29S60p0tU+LQ2Uk5ZvpMerS0IsOPjXqZDPjvqcRlKY1RuSGkzK4f+CNz4PFx9YWIO06alIp0CdeA74caFS2VcbRqgnwFzWzkEcaTrhCX4nx9eMlN/TDFaogFWoO7vjwEE6joFKIRe14Cw4EbV2lupNBprMtHXqkloWG0hc1JhrEscVmIcH33yqWwVQ4CDQbHUukcAeCbGaCtGWOm8epwtSabyf2OWbxvNmoaI=
-  app: dcg-pick-em-api
+  app: pick16-api
   on:
     repo: bosoxfan3/DCG-API
