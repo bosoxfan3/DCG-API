@@ -16,8 +16,22 @@ function sortByKey(array, key) {
 }
 
 const answerKey = [
+  'New York (NFC)',
   'New England',
-  'Oakland'
+  'Minnesota',
+  'Detroit',
+  'Indianapolis',
+  'Pittsburgh',
+  'Dallas',
+  'San Francisco',
+  'Los Angeles (AFC)',
+  'Kansas City',
+  'Tennessee',
+  'Tampa Bay',
+  'Buffalo',
+  'Arizona',
+  'Atlanta',
+  'Cincinnati'
 ];
 
 function updateUser(user) {
@@ -39,14 +53,14 @@ router.get('/scores', jsonParser, (req, res) => {
     .then(users => users.map(user => updateUser(user)))
     .then(promiseArr => {
       Promise.all()
-        .then(updatedUsers => res.json(updatedUsers.map(user => user.serialize())));
+        .then(updatedUsers => res.json(updatedUsers.map(user => user.apiRepr())));
     });
 });
 
 router.get('/all', jsonParser, (req, res) => {
   User.find()
     .then(users => sortByKey(users, 'points'))
-    .then(sortedUsers => res.json(sortedUsers.map(user => user.serialize())))
+    .then(sortedUsers => res.json(sortedUsers.map(user => user.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
@@ -58,6 +72,17 @@ router.get('/:username', jsonParser, (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.status(500).json({message: 'Internal server error'});
+    });
+});
+
+router.post('/picks/:username', jsonParser, (req, res) => {
+  User
+    .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
+    .then(user => {
+      return res.status(201).json(user.apiRepr());
+    })
+    .catch(err => {
       res.status(500).json({message: 'Internal server error'});
     });
 });
@@ -163,17 +188,6 @@ router.post('/signup', jsonParser, (req, res) => {
         return res.status(error.code).json(error);
       }
       res.status(500).json({code: 500, message: 'Internal server error'});
-    });
-});
-
-router.post('/picks/:username', jsonParser, (req, res) => {
-  User
-    .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
-    .then(user => {
-      return res.status(201).json(user.apiRepr());
-    })
-    .catch(err => {
-      res.status(500).json({message: 'Internal server error'});
     });
 });
 

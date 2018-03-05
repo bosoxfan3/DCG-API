@@ -21,15 +21,6 @@ UserSchema.methods.apiRepr = function() {
   };
 };
 
-UserSchema.methods.serialize = function() {
-  return {
-    name: this.name || '',
-    username: this.username || '',
-    picks: this.picks || null,
-    points: this.points || 0
-  };
-};
-
 UserSchema.methods.validatePassword = function(password) {
   return bcrypt.compare(password, this.password);
 };
