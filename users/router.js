@@ -34,7 +34,7 @@ function updateUser(user) {
   return user.save();
 }
 
-router.post('/scores', jsonParser, (req, res) => {
+router.get('/scores', jsonParser, (req, res) => {
   User.find({})
     .then(users => users.map(user => updateUser(user)))
     .then(promiseArr => {
@@ -99,7 +99,11 @@ router.post('/signup', jsonParser, (req, res) => {
   }
   const sizedFields = {
     username: {
-      min: 1
+      min: 1,
+      max: 17
+    },
+    name: {
+      max: 17
     },
     password: {
       min: 5,
@@ -142,8 +146,6 @@ router.post('/signup', jsonParser, (req, res) => {
           location: 'username'
         });
       }
-      // If there is no existing user, we'll hash the password
-      // and create the user
       return User.hashPassword(password);
     })
     .then(hash => {
@@ -165,16 +167,12 @@ router.post('/signup', jsonParser, (req, res) => {
 });
 
 router.post('/picks/:username', jsonParser, (req, res) => {
-  console.log('POST', req.body);
-  console.log(req.params.username);
   User
     .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
     .then(user => {
-      console.log(user);
       return res.status(201).json(user.apiRepr());
     })
     .catch(err => {
-      console.error(err);
       res.status(500).json({message: 'Internal server error'});
     });
 });
