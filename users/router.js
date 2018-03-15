@@ -127,13 +127,13 @@ router.post('/signup', jsonParser, (req, res) => {
       min: 1,
       max: 17
     },
-    name: {
-      max: 17
-    },
     password: {
       min: 5,
       // bcrypt truncates after 72 characters
       max: 72
+    },
+    name: {
+      max: 17
     }
   };
   const tooSmallField = Object.keys(sizedFields).find(
