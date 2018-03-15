@@ -76,7 +76,7 @@ router.get('/:username', jsonParser, (req, res) => {
     });
 });
 
-router.post('/picks/:username', jsonParser, (req, res) => {
+router.put('/picks/:username', jsonParser, (req, res) => {
   User
     .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
     .then(user => {
