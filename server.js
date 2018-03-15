@@ -38,7 +38,7 @@ passport.use(jwtStrategy);
 
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
-app.use('/matchups', matchupsRouter);
+app.use('/matchups', passport.authenticate('jwt', {session: false}), matchupsRouter);
 
 app.use('*', (req, res) => {
   return res.status(404).json({message: 'Not found'});
