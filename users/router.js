@@ -58,7 +58,7 @@ router.get('/scores', jsonParser, (req, res) => {
 });
 
 router.get('/all', jsonParser, (req, res) => {
-  User.find()
+  User.find({})
     .then(users => sortByKey(users, 'points'))
     .then(sortedUsers => res.json(sortedUsers.map(user => user.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
@@ -67,7 +67,6 @@ router.get('/all', jsonParser, (req, res) => {
 router.get('/:username', jsonParser, (req, res) => {
   User.findOne({username: req.params.username})
     .then(user => {
-      console.log(user);
       return res.status(200).json(user.apiRepr());
     })
     .catch(err => {
@@ -80,7 +79,7 @@ router.put('/picks/:username', jsonParser, (req, res) => {
   User
     .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
     .then(user => {
-      return res.status(201).json(user.apiRepr());
+      return res.status(204).end();
     })
     .catch(err => {
       res.status(500).json({message: 'Internal server error'});

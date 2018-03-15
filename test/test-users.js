@@ -14,6 +14,9 @@ describe('/users', function() {
   const username = 'exampleUser';
   const password = 'examplePass';
   const name = 'exampleName';
+  const username2 = 'exampleUser2';
+  const password2 = 'password2';
+  const name2 = 'name2';
 
   before(function() {
     return runServer(TEST_DATABASE_URL);
@@ -412,6 +415,107 @@ describe('/users', function() {
           .then(passwordIsCorrect => {
             expect(passwordIsCorrect).to.be.true;
           });
+      });
+      it('Should trim firstName and lastName', function() {
+        return chai
+          .request(app)
+          .post('/users/signup')
+          .send({
+            username,
+            password,
+            name: ` ${name} `,
+          })
+          .then(res => {
+            expect(res).to.have.status(201);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.keys(
+              'username',
+              'id',
+              'name',
+              'picks',
+              'points'
+            );
+            expect(res.body.username).to.equal(username);
+            expect(res.body.name).to.equal(name);
+            expect(res.body.picks).to.be.an('object');
+            expect(res.body.points).to.equal(0);
+            return User.findOne({
+              username
+            });
+          })
+          .then(user => {
+            expect(user).to.not.be.null;
+            expect(user.name).to.equal(name);
+            expect(user.picks).to.be.an('object');
+            expect(user.points).to.equal(0);
+          });
+      });
+    });
+
+    describe('/users/:username', function() {
+      describe('GET', function() {
+        it('should return the user info that matches the username', function() {
+          return User.hashPassword(password).then(password =>
+            User.create({
+              username,
+              password,
+              name
+            })
+          )
+            .then(function(user) {
+              chai
+                .request(app)
+                .get(`/users/${user.username}`)
+                .then(res => {
+                  expect(res).to.have.status(200);
+                  expect(res.body.username).to.equal(username);
+                  expect(res.body.name).to.equal(name);
+                  expect(res.body.points).to.equal(0);
+                  expect(res.body.picks).to.be.an('object');
+                });
+            });
+        });
+      });
+    });
+
+    describe('/users/all', function() {
+      describe('GET', function() {
+        it('should return all users in the database', function() {
+          return User.create({username, password, name})
+            .then(function(user) {
+              chai
+                .request(app)
+                .get('/users/all')
+                .then(res => {
+                  expect(res).to.have.status(200);
+                  expect(res.body).to.be.an('array');
+                  expect(res.body.length).to.equal(1);
+                });
+            });
+        });
+      });
+    });
+
+    describe('/users/picks/:username', function() {
+      describe('PUT', function() {
+        it('should update and return the picks for a specified user', function() {
+          const pick = {matchup0: 'Washington'};
+          return User.create({username, password, name})
+            .then(function(user) {
+              chai
+                .request(app)
+                .put(`/users/picks/${user.username}`)
+                .send(pick)
+                .then(res => {
+                  expect(res).to.have.status(204);
+                  User.find({username: username});
+                })
+                .then(updatedUser => {
+                  console.log(updatedUser, 'piandlnafklsdnflkdsa');
+                  expect(updatedUser.picks.matchup0).to.equal('Atlanta');
+                });
+            });
+        });
       });
     });
   });
