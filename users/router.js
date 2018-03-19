@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const { User } = require('./models');
 
@@ -15,73 +16,20 @@ function sortByKey(array, key) {
   });
 }
 
-const answerKey = [
-  'New York (NFC)',
-  'New England',
-  'Minnesota',
-  'Detroit',
-  'Indianapolis',
-  'Pittsburgh',
-  'Dallas',
-  'San Francisco',
-  'Los Angeles (AFC)',
-  'Kansas City',
-  'Tennessee',
-  'Tampa Bay',
-  'Buffalo',
-  'Arizona',
-  'Atlanta',
-  'Cincinnati'
-];
-
-function updateUser(user) {
-  let picksArray = [];
-  for (let key in user.picks) {
-    picksArray.push(user.picks[key]);
-  }
-  for (let i=0; i<picksArray.length; i++) {
-    let currentPick = picksArray[i];
-    if (currentPick === answerKey[i]) {
-      user.points += 1;
-    }
-  }
-  return user.save();
-}
-
-router.get('/scores', jsonParser, (req, res) => {
-  User.find({})
-    .then(users => users.map(user => updateUser(user)))
-    .then(promiseArr => {
-      Promise.all()
-        .then(updatedUsers => res.json(updatedUsers.map(user => user.apiRepr())));
-    });
-});
-
-router.get('/all', jsonParser, (req, res) => {
+router.get('/all', jsonParser, passport.authenticate('jwt', {session: false}), (req, res) => {
   User.find({})
     .then(users => sortByKey(users, 'points'))
     .then(sortedUsers => res.json(sortedUsers.map(user => user.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-router.get('/:username', jsonParser, (req, res) => {
+router.get('/:username', jsonParser, passport.authenticate('jwt', {session: false}), (req, res) => {
   User.findOne({username: req.params.username})
     .then(user => {
       return res.status(200).json(user.apiRepr());
     })
     .catch(err => {
       console.error(err);
-      res.status(500).json({message: 'Internal server error'});
-    });
-});
-
-router.put('/picks/:username', jsonParser, (req, res) => {
-  User
-    .findOneAndUpdate({username: req.params.username}, {$set: {picks: req.body}})
-    .then(user => {
-      return res.status(204).end();
-    })
-    .catch(err => {
       res.status(500).json({message: 'Internal server error'});
     });
 });

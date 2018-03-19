@@ -11,15 +11,25 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('/users', function() {
-  const username = 'exampleUser';
-  const password = 'examplePass';
-  const name = 'exampleName';
-  const username2 = 'exampleUser2';
-  const password2 = 'password2';
-  const name2 = 'name2';
+  const constantUsername = 'username';
+  const constantPassword = 'password';
+  const constantName = 'name';
+  const testUsername = 'testUser';
+  const testPassword = 'testPass';
+  const testName = 'testName';
 
   before(function() {
     return runServer(TEST_DATABASE_URL);
+  });
+
+  beforeEach(function() {
+    return User.hashPassword(constantPassword).then(password =>
+      User.create({
+        username: constantUsername,
+        password,
+        name: constantName
+      })
+    );
   });
 
   afterEach(function() {
@@ -37,8 +47,8 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            password,
-            name
+            password: testPassword,
+            name: testName
           })
           .then(() => 
             expect.fail(null, null, 'Request should not succeed')
@@ -59,8 +69,8 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
-            name
+            username: testUsername,
+            name: testName
           })
           .then(() => 
             expect.fail(null, null, 'Request should not succeed')
@@ -82,8 +92,8 @@ describe('/users', function() {
           .post('/users/signup')
           .send({
             username: 1234,
-            password,
-            name
+            password: testPassword,
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -107,8 +117,8 @@ describe('/users', function() {
           .post('/users/signup')
           .send({
             username: 1234,
-            password,
-            name
+            password: testPassword,
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -131,7 +141,7 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
+            username:,
             password: 1234,
             name
           })
@@ -454,25 +464,31 @@ describe('/users', function() {
 
     describe('/users/:username', function() {
       describe('GET', function() {
-        it('should return the user info that matches the username', function() {
-          return User.hashPassword(password).then(password =>
-            User.create({
-              username,
-              password,
-              name
-            })
-          )
-            .then(function(user) {
-              chai
-                .request(app)
-                .get(`/users/${user.username}`)
-                .then(res => {
-                  expect(res).to.have.status(200);
-                  expect(res.body.username).to.equal(username);
-                  expect(res.body.name).to.equal(name);
-                  expect(res.body.points).to.equal(0);
-                  expect(res.body.picks).to.be.an('object');
-                });
+        it('Should return the user info based on username param', function() {
+          const token = jwt.sign(
+            {
+              user: {
+                username: username2,
+                name: name2
+              }
+            },
+            JWT_SECRET,
+            {
+              algorithm: 'HS256',
+              subject: username,
+              expiresIn: '7d'
+            }
+          );
+          const decoded = jwt.decode(token);
+          return chai
+            .request(app)
+            .get(`/users/${username2}`)
+            .set('authorization', `Bearer ${token}`)
+            .then(res => {
+              expect(res.body.username).to.equal(username2);
+              expect(res.body.name).to.equal(name2);
+              expect(res.body.picks).to.be.an('object');
+              expect(res.body.points).to.equal(0);
             });
         });
       });
@@ -487,32 +503,10 @@ describe('/users', function() {
                 .request(app)
                 .get('/users/all')
                 .then(res => {
+                  console.log(res.body);
                   expect(res).to.have.status(200);
                   expect(res.body).to.be.an('array');
                   expect(res.body.length).to.equal(1);
-                });
-            });
-        });
-      });
-    });
-
-    describe('/users/picks/:username', function() {
-      describe('PUT', function() {
-        it('should update and return the picks for a specified user', function() {
-          const pick = {matchup0: 'Washington'};
-          return User.create({username, password, name})
-            .then(function(user) {
-              chai
-                .request(app)
-                .put(`/users/picks/${user.username}`)
-                .send(pick)
-                .then(res => {
-                  expect(res).to.have.status(204);
-                  User.find({username: username});
-                })
-                .then(updatedUser => {
-                  console.log(updatedUser, 'piandlnafklsdnflkdsa');
-                  expect(updatedUser.picks.matchup0).to.equal('Atlanta');
                 });
             });
         });
