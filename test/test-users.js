@@ -141,9 +141,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username:,
+            username: testUsername,
             password: 1234,
-            name
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -166,8 +166,8 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
-            password,
+            username: testUsername,
+            password: testPassword,
             name: 1234
           })
           .then(() =>
@@ -191,9 +191,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username: ` ${username} `,
-            password,
-            name
+            username: ` ${testUsername} `,
+            password: testPassword,
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -216,9 +216,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
-            password: ` ${password} `,
-            name
+            username: testUsername,
+            password: ` ${testPassword} `,
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -242,8 +242,8 @@ describe('/users', function() {
           .post('/users/signup')
           .send({
             username: '',
-            password,
-            name
+            password: testPassword,
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -267,8 +267,8 @@ describe('/users', function() {
           .post('/users/signup')
           .send({
             username: new Array(18).fill('a').join(''),
-            password,
-            name
+            password: testPassword,
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -291,9 +291,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
+            username: testUsername,
             password: '1234',
-            name
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -316,9 +316,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
+            username: testUsername,
             password: new Array(73).fill('a').join(''),
-            name
+            name: testName
           })
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -341,8 +341,8 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
-            password, 
+            username: testUsername,
+            password: testPassword, 
             name: new Array(18).fill('a').join(''),
           })
           .then(() =>
@@ -363,15 +363,15 @@ describe('/users', function() {
       });
       it('Should reject users with duplicate username', function() {
         return User.create({
-          username,
-          password,
-          name
+          username: testUsername,
+          password: testPassword,
+          name: testName
         })
           .then(() =>
             chai.request(app).post('/users/signup').send({
-              username,
-              password,
-              name
+              username: testUsername,
+              password: testPassword,
+              name: testName
             })
           )
           .then(() =>
@@ -395,9 +395,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
-            password,
-            name
+            username: testUsername,
+            password: testPassword,
+            name: testName
           })
           .then(res => {
             expect(res).to.have.status(201);
@@ -409,18 +409,18 @@ describe('/users', function() {
               'picks',
               'points'
             );
-            expect(res.body.username).to.equal(username);
-            expect(res.body.name).to.equal(name);
+            expect(res.body.username).to.equal(testUsername);
+            expect(res.body.name).to.equal(testName);
             expect(res.body.picks).to.be.an('object');
             expect(res.body.points).to.equal(0);
             return User.findOne({
-              username
+              username: testUsername
             });
           })
           .then(user => {
             expect(user).to.not.be.null;
-            expect(user.name).to.equal(name);
-            return user.validatePassword(password);
+            expect(user.name).to.equal(testName);
+            return user.validatePassword(testPassword);
           })
           .then(passwordIsCorrect => {
             expect(passwordIsCorrect).to.be.true;
@@ -431,9 +431,9 @@ describe('/users', function() {
           .request(app)
           .post('/users/signup')
           .send({
-            username,
-            password,
-            name: ` ${name} `,
+            username: testUsername,
+            password: testPassword,
+            name: ` ${testName} `,
           })
           .then(res => {
             expect(res).to.have.status(201);
@@ -445,17 +445,17 @@ describe('/users', function() {
               'picks',
               'points'
             );
-            expect(res.body.username).to.equal(username);
-            expect(res.body.name).to.equal(name);
+            expect(res.body.username).to.equal(testUsername);
+            expect(res.body.name).to.equal(testName);
             expect(res.body.picks).to.be.an('object');
             expect(res.body.points).to.equal(0);
             return User.findOne({
-              username
+              username: testUsername
             });
           })
           .then(user => {
             expect(user).to.not.be.null;
-            expect(user.name).to.equal(name);
+            expect(user.name).to.equal(testName);
             expect(user.picks).to.be.an('object');
             expect(user.points).to.equal(0);
           });
@@ -468,25 +468,25 @@ describe('/users', function() {
           const token = jwt.sign(
             {
               user: {
-                username: username2,
-                name: name2
+                username: constantUsername,
+                name: constantName
               }
             },
             JWT_SECRET,
             {
               algorithm: 'HS256',
-              subject: username,
+              subject: constantUsername,
               expiresIn: '7d'
             }
           );
           const decoded = jwt.decode(token);
           return chai
             .request(app)
-            .get(`/users/${username2}`)
+            .get(`/users/${constantUsername}`)
             .set('authorization', `Bearer ${token}`)
             .then(res => {
-              expect(res.body.username).to.equal(username2);
-              expect(res.body.name).to.equal(name2);
+              expect(res.body.username).to.equal(constantUsername);
+              expect(res.body.name).to.equal(constantName);
               expect(res.body.picks).to.be.an('object');
               expect(res.body.points).to.equal(0);
             });
@@ -497,17 +497,28 @@ describe('/users', function() {
     describe('/users/all', function() {
       describe('GET', function() {
         it('should return all users in the database', function() {
-          return User.create({username, password, name})
-            .then(function(user) {
-              chai
-                .request(app)
-                .get('/users/all')
-                .then(res => {
-                  console.log(res.body);
-                  expect(res).to.have.status(200);
-                  expect(res.body).to.be.an('array');
-                  expect(res.body.length).to.equal(1);
-                });
+          const token = jwt.sign(
+            {
+              user: {
+                username: constantUsername,
+                name: constantName
+              }
+            },
+            JWT_SECRET,
+            {
+              algorithm: 'HS256',
+              subject: constantUsername,
+              expiresIn: '7d'
+            }
+          );
+          return chai
+            .request(app)
+            .get('/users/all')
+            .set('authorization', `Bearer ${token}`)
+            .then(res => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.be.an('array');
+              expect(res.body.length).to.equal(1);
             });
         });
       });

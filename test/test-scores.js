@@ -8,12 +8,16 @@ const { JWT_SECRET, TEST_DATABASE_URL } = require('../config');
 
 const expect = chai.expect;
 
+
 chai.use(chaiHttp);
 
-describe('Matchup endpoints', function() {
+describe('Scores endpoint', function() {
   const username = 'exampleUser';
-  const password = 'examplePass';
+  const password = 'examplePassword';
   const name = 'exampleName';
+  const picks = {
+    matchup0: 'New York (NFC)'
+  };
 
   before(function() {
     return runServer(TEST_DATABASE_URL);
@@ -24,7 +28,8 @@ describe('Matchup endpoints', function() {
       User.create({
         username,
         password,
-        name
+        name,
+        picks
       })
     );
   });
@@ -37,12 +42,12 @@ describe('Matchup endpoints', function() {
     return closeServer();
   });
 
-  describe('/matchups', function() {
+  describe('/scores', function() {
     describe('GET endpoint', function() {
       it('Should reject requests with no credentials', function() {
         return chai
           .request(app)
-          .get('/matchups/')
+          .get('/scores/')
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
           )
@@ -68,7 +73,7 @@ describe('Matchup endpoints', function() {
         );
         return chai
           .request(app)
-          .get('/matchups/')
+          .get('/scores/')
           .set('Authorization', `Bearer ${token}`)
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -98,7 +103,7 @@ describe('Matchup endpoints', function() {
         );
         return chai
           .request(app)
-          .get('/matchups/')
+          .get('/scores/')
           .set('authorization', `Bearer ${token}`)
           .then(() =>
             expect.fail(null, null, 'Request should not succeed')
@@ -109,30 +114,6 @@ describe('Matchup endpoints', function() {
             }
             const res = err.response;
             expect(res).to.have.status(401);
-          });
-      });
-      it('Should send back all matchups on GET request', function() {
-        const token = jwt.sign(
-          {
-            user: {
-              username,
-              name
-            }
-          },
-          JWT_SECRET,
-          {
-            algorithm: 'HS256',
-            subject: username,
-            expiresIn: '7d'
-          }
-        );
-        return chai
-          .request(app)
-          .get('/matchups/')
-          .set('authorization', `Bearer ${token}`)
-          .then(res => {
-            expect(res).to.have.status(200);
-            expect(res.body).to.be.an('array');
           });
       });
     });
