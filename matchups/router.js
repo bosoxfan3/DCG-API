@@ -40,7 +40,7 @@ const matchups = [
   ['New York (AFC)', 'New England', newYorkAFC, newEngland],
   ['Chicago', 'Minnesota', chicago, minnesota],
   ['Green Bay', 'Detroit', greenBay, detroit],
-  ['Houston', 'Indianpolis', houston, indianapolis],
+  ['Houston', 'Indianapolis', houston, indianapolis],
   ['Cleveland', 'Pittsburgh', cleveland, pittsburgh],
   ['Dallas', 'Philadelphia', dallas, philadelphia],
   ['San Francisco', 'Los Angeles (NFC)', sanFrancisco, losAngelesNFC],
