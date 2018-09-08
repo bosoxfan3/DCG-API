@@ -36,22 +36,22 @@ const tennessee = 'https://static.nfl.com/static/content/public/static/wildcat/a
 const washington = 'https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/WAS.svg';
 
 const matchups = [
-  ['Washington', 'New York (NFC)', washington, newYorkNFC],
-  ['New York (AFC)', 'New England', newYorkAFC, newEngland],
-  ['Chicago', 'Minnesota', chicago, minnesota],
-  ['Green Bay', 'Detroit', greenBay, detroit],
-  ['Houston', 'Indianapolis', houston, indianapolis],
-  ['Cleveland', 'Pittsburgh', cleveland, pittsburgh],
-  ['Dallas', 'Philadelphia', dallas, philadelphia],
-  ['San Francisco', 'Los Angeles (NFC)', sanFrancisco, losAngelesNFC],
-  ['Oakland', 'Los Angeles (AFC)', oakland, losAngelesAFC],
-  ['Kansas City', 'Denver', kansasCity, denver],
-  ['Jacksonville', 'Tennessee', jacksonville, tennessee],
-  ['New Orleans', 'Tampa Bay', newOrleans, tampaBay],
-  ['Buffalo', 'Miami', buffalo, miami],
-  ['Arizona', 'Seattle', arizona, seattle],
-  ['Carolina', 'Atlanta', carolina, atlanta],
-  ['Cincinnati', 'Baltimore', cincinnati, baltimore]
+  ['Falcons', 'Eagles', atlanta, philadelphia],
+  ['Titans', 'Dolphins', tennessee, miami],
+  ['Bengals', 'Colts', cincinnati, indianapolis],
+  ['Buccaneers', 'Saints', tampaBay, newOrleans],
+  ['Bills', 'Ravens', buffalo, baltimore],
+  ['Texans', 'Patriots', houston, newEngland],
+  ['Steelers', 'Browns', pittsburgh, cleveland],
+  ['Jaguars', 'Giants', jacksonville, newYorkNFC],
+  ['49ers', 'Vikings', sanFrancisco, minnesota],
+  ['Chiefs', 'Chargers', kansasCity, losAngelesAFC],
+  ['Cowboys', 'Panthers', dallas, carolina],
+  ['Redskins', 'Cardinals', washington, arizona],
+  ['Seahawks', 'Broncos', seattle, denver],
+  ['Bears', 'Packers', chicago, greenBay],
+  ['Jets', 'Lions', newYorkAFC, detroit],
+  ['Rams', 'Raiders', losAngelesNFC, oakland]
 ];
 
 router.get('/', (req, res) => {
