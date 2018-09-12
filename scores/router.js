@@ -9,21 +9,21 @@ const jsonParser = bodyParser.json();
 
 const answerKey = [
   'Eagles',
-  'New England',
-  'Minnesota',
-  'Detroit',
-  'Indianapolis',
-  'Pittsburgh',
-  'Dallas',
-  'San Francisco',
-  'Los Angeles (AFC)',
-  'Kansas City',
-  'Tennessee',
-  'Tampa Bay',
-  'Buffalo',
-  'Arizona',
-  'Atlanta',
-  'Cincinnati'
+  'Dolphins',
+  'Bengals',
+  'Buccaneers',
+  'Ravens',
+  'Patriots',
+  'Tie',
+  'Jacksonville',
+  'Vikings',
+  'Chiefs',
+  'Panthers',
+  'Redskins',
+  'Broncos',
+  'Packers',
+  'Jets',
+  'Rams'
 ];
 
 function updateUser(user) {
