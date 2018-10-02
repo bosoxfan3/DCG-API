@@ -36,21 +36,21 @@ const tennessee = { name: 'Titans', logo: 'https://static.nfl.com/static/content
 const washington = { name: 'Redskins', logo: 'https://static.nfl.com/static/content/public/static/wildcat/assets/img/logos/teams/WAS.svg' };
 
 const matchups = [
-  [minnesota.name, losAngelesNFC.name, minnesota.logo, losAngelesNFC.logo],
-  [detroit.name, dallas.name, detroit.logo, dallas.logo],
-  [tampaBay.name, chicago.name, tampaBay.logo, chicago.logo],
-  [miami.name, newEngland.name, miami.logo, newEngland.logo],
-  [cincinnati.name, atlanta.name, cincinnati.logo, atlanta.logo],
-  [buffalo.name, greenBay.name, buffalo.logo, greenBay.logo],
-  [houston.name, indianapolis.name, houston.logo, indianapolis.logo],
-  [newYorkAFC.name, jacksonville.name, newYorkAFC.logo, jacksonville.logo],
-  [philadelphia.name, tennessee.name, philadelphia.logo, tennessee.logo],
-  [cleveland.name, oakland.name, cleveland.logo, oakland.logo],
-  [seattle.name, arizona.name, seattle.logo, arizona.logo],
-  [newOrleans.name, newYorkNFC.name, newOrleans.logo, newYorkNFC.logo],
-  [sanFrancisco.name, losAngelesAFC.name, sanFrancisco.logo, losAngelesAFC.logo],
-  [baltimore.name, pittsburgh.name, baltimore.logo, pittsburgh.logo],
-  [kansasCity.name, denver.name, kansasCity.logo, denver.logo]
+  [indianapolis.name, newEngland.name, indianapolis.logo, newEngland.logo],
+  [jacksonville.name, kansasCity.name, jacksonville.logo, kansasCity.logo],
+  [greenBay.name, detroit.name, greenBay.logo, detroit.logo],
+  [tennessee.name, buffalo.name, tennessee.logo, buffalo.logo],
+  [miami.name, cincinnati.name, miami.logo, cincinnati.logo],
+  [baltimore.name, cleveland.name, baltimore.logo, cleveland.logo],
+  [newYorkNFC.name, carolina.name, newYorkNFC.logo, carolina.logo],
+  [denver.name, newYorkAFC.name, denver.logo, newYorkAFC.logo],
+  [atlanta.name, pittsburgh.name, atlanta.logo, pittsburgh.logo],
+  [oakland.name, losAngelesAFC.name, oakland.logo, losAngelesAFC.logo],
+  [losAngelesNFC.name, seattle.name, losAngelesNFC.logo, seattle.logo],
+  [arizona.name, sanFrancisco.name, arizona.logo, sanFrancisco.logo],
+  [minnesota.name, philadelphia.name, minnesota.logo, philadelphia.logo],
+  [dallas.name, houston.name, dallas.logo, houston.logo],
+  [washington.name, newOrleans.name, washington.logo, newOrleans.logo]
 ];
 
 router.get('/', (req, res) => {
