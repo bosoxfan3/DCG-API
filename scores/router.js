@@ -8,21 +8,21 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 const answerKey = [
-  'Rams',
-  'Cowboys',
-  'Bears',
   'Patriots',
+  'Chiefs',
+  'Lions',
+  'Bills',
   'Bengals',
-  'Packers',
-  'Texans',
-  'Jaguars',
-  'Titans',
-  'Raiders',
-  'Seahawks',
-  'Saints',
+  'Browns',
+  'Panthers',
+  'Jets',
+  'Steelers',
   'Chargers',
-  'Ravens',
-  'Chiefs'
+  'Rams',
+  'Cardinals',
+  'Vikings',
+  'Texans',
+  'Saints'
 ];
 
 function updateUser(user) {
