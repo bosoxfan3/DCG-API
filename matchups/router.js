@@ -132,20 +132,20 @@ const washington = {
 };
 
 const matchups = [
-    [denver.name, arizona.name, denver.logo, arizona.logo],
-    [tennessee.name, losAngelesAFC.name, tennessee.logo, losAngelesAFC.logo],
-    [newEngland.name, chicago.name, newEngland.logo, chicago.logo],
-    [cleveland.name, tampaBay.name, cleveland.logo, tampaBay.logo],
-    [houston.name, jacksonville.name, houston.logo, jacksonville.logo],
-    [minnesota.name, newYorkAFC.name, minnesota.logo, newYorkAFC.logo],
-    [buffalo.name, indianapolis.name, buffalo.logo, indianapolis.logo],
-    [detroit.name, miami.name, detroit.logo, miami.logo],
-    [carolina.name, philadelphia.name, carolina.logo, philadelphia.logo],
-    [newOrleans.name, baltimore.name, newOrleans.logo, baltimore.logo],
-    [dallas.name, washington.name, dallas.logo, washington.logo],
-    [losAngelesNFC.name, sanFrancisco.name, losAngelesNFC.logo, sanFrancisco.logo],
-    [cincinnati.name, kansasCity.name, cincinnati.logo, kansasCity.logo],
-    [newYorkNFC.name, atlanta.name, newYorkNFC.logo, atlanta.logo]
+    [miami.name, houston.name, miami.logo, houston.logo],
+    [philadelphia.name, jacksonville.name, philadelphia.logo, jacksonville.logo],
+    [denver.name, kansasCity.name, denver.logo, kansasCity.logo],
+    [cleveland.name, pittsburgh.name, cleveland.logo, pittsburgh.logo],
+    [tampaBay.name, cincinnati.name, tampaBay.logo, cincinnati.logo],
+    [baltimore.name, carolina.name, baltimore.logo, carolina.logo],
+    [washington.name, newYorkNFC.name, washington.logo, newYorkNFC.logo],
+    [newYorkAFC.name, chicago.name, newYorkAFC.logo, chicago.logo],
+    [seattle.name, detroit.name, seattle.logo, detroit.logo],
+    [indianapolis.name, oakland.name, indianapolis.logo, oakland.logo],
+    [greenBay.name, losAngelesNFC.name, greenBay.logo, losAngelesNFC.logo],
+    [sanFrancisco.name, arizona.name, sanFrancisco.logo, arizona.logo],
+    [newOrleans.name, minnesota.name, newOrleans.logo, minnesota.logo],
+    [newEngland.name, buffalo.name, newEngland.logo, buffalo.logo]
 ];
 
 router.get('/', (req, res) => {
