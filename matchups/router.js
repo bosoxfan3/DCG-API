@@ -132,20 +132,19 @@ const washington = {
 };
 
 const matchups = [
-    [miami.name, houston.name, miami.logo, houston.logo],
-    [philadelphia.name, jacksonville.name, philadelphia.logo, jacksonville.logo],
-    [denver.name, kansasCity.name, denver.logo, kansasCity.logo],
-    [cleveland.name, pittsburgh.name, cleveland.logo, pittsburgh.logo],
-    [tampaBay.name, cincinnati.name, tampaBay.logo, cincinnati.logo],
-    [baltimore.name, carolina.name, baltimore.logo, carolina.logo],
-    [washington.name, newYorkNFC.name, washington.logo, newYorkNFC.logo],
-    [newYorkAFC.name, chicago.name, newYorkAFC.logo, chicago.logo],
-    [seattle.name, detroit.name, seattle.logo, detroit.logo],
-    [indianapolis.name, oakland.name, indianapolis.logo, oakland.logo],
-    [greenBay.name, losAngelesNFC.name, greenBay.logo, losAngelesNFC.logo],
-    [sanFrancisco.name, arizona.name, sanFrancisco.logo, arizona.logo],
-    [newOrleans.name, minnesota.name, newOrleans.logo, minnesota.logo],
-    [newEngland.name, buffalo.name, newEngland.logo, buffalo.logo]
+    [oakland.name, sanFrancisco.name, oakland.logo, sanFrancisco.logo],
+    [chicago.name, buffalo.name, chicago.logo, buffalo.logo],
+    [tampaBay.name, carolina.name, tampaBay.logo, carolina.logo],
+    [kansasCity.name, cleveland.name, kansasCity.logo, cleveland.logo],
+    [atlanta.name, washington.name, atlanta.logo, washington.logo],
+    [newYorkAFC.name, miami.name, newYorkAFC.logo, carolina.logo],
+    [pittsburgh.name, baltimore.name, pittsburgh.logo, baltimore.logo],
+    [detroit.name, minnesota.name, detroit.logo, minnesota.logo],
+    [losAngelesAFC.name, seattle.name, losAngelesAFC.logo, seattle.logo],
+    [houston.name, denver.name, houston.logo, denver.logo],
+    [losAngelesNFC.name, newOrleans.name, losAngelesNFC.logo, newOrleans.logo],
+    [greenBay.name, newEngland.name, greenBay.logo, newEngland.logo],
+    [tennessee.name, dallas.name, tennessee.logo, dallas.logo]
 ];
 
 router.get('/', (req, res) => {
