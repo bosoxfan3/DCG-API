@@ -137,7 +137,7 @@ const matchups = [
     [tampaBay.name, carolina.name, tampaBay.logo, carolina.logo],
     [kansasCity.name, cleveland.name, kansasCity.logo, cleveland.logo],
     [atlanta.name, washington.name, atlanta.logo, washington.logo],
-    [newYorkAFC.name, miami.name, newYorkAFC.logo, carolina.logo],
+    [newYorkAFC.name, miami.name, newYorkAFC.logo, miami.logo],
     [pittsburgh.name, baltimore.name, pittsburgh.logo, baltimore.logo],
     [detroit.name, minnesota.name, detroit.logo, minnesota.logo],
     [losAngelesAFC.name, seattle.name, losAngelesAFC.logo, seattle.logo],
