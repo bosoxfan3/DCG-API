@@ -132,19 +132,21 @@ const washington = {
 };
 
 const matchups = [
-    [greenBay.name, seattle.name, greenBay.logo, seattle.logo],
-    [houston.name, washington.name, houston.logo, washington.logo],
-    [cincinnati.name, baltimore.name, cincinnati.logo, baltimore.logo],
-    [pittsburgh.name, jacksonville.name, pittsburgh.logo, jacksonville.logo],
-    [carolina.name, detroit.name, carolina.logo, detroit.logo],
-    [dallas.name, atlanta.name, dallas.logo, atlanta.logo],
-    [tennessee.name, indianapolis.name, tennessee.logo, indianapolis.logo],
-    [tampaBay.name, newYorkNFC.name, tampaBay.logo, newYorkNFC.logo],
-    [oakland.name, arizona.name, oakland.logo, arizona.logo],
-    [denver.name, losAngelesAFC.name, denver.logo, losAngelesAFC.logo],
-    [philadelphia.name, newOrleans.name, philadelphia.logo, newOrleans.logo],
-    [minnesota.name, chicago.name, minnesota.logo, chicago.logo],
-    [kansasCity.name, losAngelesNFC.name, kansasCity.logo, losAngelesNFC.logo]
+    [chicago.name, detroit.name, chicago.logo, detroit.logo],
+    [washington.name, dallas.name, washington.logo, dallas.logo],
+    [atlanta.name, newOrleans.name, atlanta.logo, newOrleans.logo],
+    [newEngland.name, newYorkAFC.name, newEngland.logo, newYorkAFC.logo],
+    [oakland.name, baltimore.name, oakland.logo, baltimore.logo],
+    [newYorkNFC.name, philadelphia.name, newYorkNFC.logo, philadelphia.logo],
+    [sanFrancisco.name, tampaBay.name, sanFrancisco.logo, tampaBay.logo],
+    [cleveland.name, cincinnati.name, cleveland.logo, cincinnati.logo],
+    [seattle.name, carolina.name, seattle.logo, carolina.logo],
+    [jacksonville.name, buffalo.name, jacksonville.logo, buffalo.logo],
+    [arizona.name, losAngelesAFC.name, arizona.logo, losAngelesAFC.logo],
+    [miami.name, indianapolis.name, miami.logo, indianapolis.logo],
+    [pittsburgh.name, denver.name, pittsburgh.logo, denver.logo],
+    [greenBay.name, minnesota.name, greenBay.logo, minnesota.logo],
+    [tennessee.name, houston.name, tennessee.logo, houston.logo]
 ];
 
 router.get('/', (req, res) => {
